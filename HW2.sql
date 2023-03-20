@@ -17,7 +17,14 @@ VALUES
     
 SELECT * FROM `sales`;
 
-SELECT id,
+/*
+Для данных таблицы “sales” укажите тип заказа в зависимости от кол-ва : 
+меньше 100  -    Маленький заказ
+от 100 до 300 - Средний заказ
+больше 300  -     Большой заказ
+
+*/
+SELECT id, count_product,
 	CASE
 		WHEN count_product < 100 THEN "Маленкий заказ"
         WHEN count_product BETWEEN 100 AND 300 THEN "Средний заказ"
@@ -26,6 +33,7 @@ SELECT id,
 	END AS 'Тип заказа'
     FROM sales;
 
+-- Создайте таблицу “orders”, заполните ее значениями;
 CREATE TABLE IF NOT EXISTS `orders`
 (
 `id` INT PRIMARY KEY AUTO_INCREMENT,
@@ -43,7 +51,11 @@ VALUES
 ('e04', 9.50, 'CANCELLED');
 
 
+/*
+Выберите все заказы. В зависимости от поля order_status выведите столбец full_order_status:
+OPEN – «Order is in open state» ; CLOSED - «Order is closed»; CANCELLED -  «Order is cancelled»
 
+*/
 SELECT id, employee_id, amount, order_status,
 	CASE
 		WHEN order_status = 'OPEN' THEN "Order is in open state"
